@@ -1,4 +1,4 @@
-import "../styles/App.scss";
+
 import "../styles/Board.scss";
 import Grogu from "./Grogu";
 

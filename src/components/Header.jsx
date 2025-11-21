@@ -1,4 +1,3 @@
-import "../styles/App.scss";
 import "../styles/Header.scss";
 
 function Header(){

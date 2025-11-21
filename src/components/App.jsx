@@ -33,6 +33,7 @@ function App() {
     <div>
      <Header/>
       <main className="page">
+       <Board/>
         <section>
           <button onClick={handleRollDice} className="dice">
             Lanzar Dado
@@ -40,7 +41,7 @@ function App() {
           <div className="game-status">En curso</div>
         </section>
 
-        <Board />
+
 
         <section className="goods-container">
           <div className="goods-item">🍪</div>
