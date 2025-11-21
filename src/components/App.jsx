@@ -40,9 +40,6 @@ function App() {
           </button>
           <div className="game-status">En curso</div>
         </section>
-
-
-
         <section className="goods-container">
           <div className="goods-item">🍪</div>
           <div className="goods-item">🍪</div>
