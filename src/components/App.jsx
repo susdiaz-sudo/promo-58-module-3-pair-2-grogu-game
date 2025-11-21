@@ -1,7 +1,7 @@
 // Fichero src/components/App.jsx
 import { useState } from "react";
 import "../styles/App.scss";
-import Board from "../components/Board.jsx";
+import Board from "./Board";
 import Header from "./Header";
 
 function App() {
