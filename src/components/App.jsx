@@ -13,7 +13,7 @@ function App() {
   //const [status, setStatus] = useState("En curso");
 
   function getRandomNumber() {
-    return Math.floor(Math.random() * 4);
+    return Math.floor(Math.random() * (5-1) + 1);
   }
 
   function handleRollDice() {
