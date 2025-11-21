@@ -1,6 +1,7 @@
 // Fichero src/components/App.jsx
 import { useState } from "react";
 import "../styles/App.scss";
+import Board from "../components/Board.jsx";
 
 function App() {
   const [position, setPosition] = useState(1);
@@ -33,24 +34,14 @@ function App() {
         <h1 className="title">¡Cuidado con Grogu!</h1>
       </header>
       <main className="page">
-        <section className="board">
-          <div className="cell">
-            <div className="grogu">👣</div>
-          </div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-        </section>
-
         <section>
           <button onClick={handleRollDice} className="dice">
             Lanzar Dado
           </button>
           <div className="game-status">En curso</div>
         </section>
+
+        <Board />
 
         <section className="goods-container">
           <div className="goods-item">🍪</div>
