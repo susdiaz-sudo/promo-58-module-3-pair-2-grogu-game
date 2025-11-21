@@ -1,9 +1,10 @@
-import "../styles/App.scss"
-import "../styles/Board.scss"
+import "../styles/App.scss";
+import "../styles/Board.scss";
+import Grogu from "./Grogu";
 
 function Board () {
 <section className="board">
-          <div className="cell"></div>
+          <div className="cell"><Grogu/></div>
           <div className="cell"></div>
           <div className="cell"></div>
           <div className="cell"></div>
@@ -13,4 +14,4 @@ function Board () {
         </section>
         }
 
-export default Board
+export default Board;
