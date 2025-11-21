@@ -1,20 +1,5 @@
-body,
-html {
-  height: 100%;
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: url('../images/grogu.webp') no-repeat center center fixed;
-  background-size: cover;
-}
+@use "./core/reset";
 
-.title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  color: #fff;
-}
 
 .page {
   display: flex;

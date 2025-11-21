@@ -2,6 +2,7 @@
 import { useState } from "react";
 import "../styles/App.scss";
 import Board from "../components/Board.jsx";
+import Header from "./Header";
 
 function App() {
   const [position, setPosition] = useState(1);
@@ -30,9 +31,7 @@ function App() {
 
   return (
     <div>
-      <header>
-        <h1 className="title">¡Cuidado con Grogu!</h1>
-      </header>
+     <Header/>
       <main className="page">
         <section>
           <button onClick={handleRollDice} className="dice">
