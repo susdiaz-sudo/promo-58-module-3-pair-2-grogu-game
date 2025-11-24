@@ -3,6 +3,7 @@ import { useState } from "react";
 import "../styles/App.scss";
 import Board from "./Board";
 import Header from "./Header";
+import Dice from "./Dice";
 
 function App() {
   const [position, setPosition] = useState(1);
@@ -10,35 +11,33 @@ function App() {
   const [eggs, setEggs] = useState(3);
   const [frogs, setFrogs] = useState(3);
   const [dice, setDice] = useState();
-  //const [status, setStatus] = useState("En curso");
+  const [status, setStatus] = useState("En curso");
 
-  function getRandomNumber() {
-    return Math.floor(Math.random() * 4);
-  }
-
-  function handleRollDice() {
-    setDice(getRandomNumber());
-    if (dice === 4) {
+  function RollDice(numberDice) {
+    setDice(numberDice);
+    if (numberDice === 4) {
       setPosition(position + 1);
-    } else if (dice === 1) {
+      setStatus("Grogu avanza una casilla");
+    } else if (numberDice === 1 && cookies !== 0) {
       setCookies(cookies - 1);
-    } else if (dice === 2) {
+      setStatus("Has ayudado a Mando a recoger una galleta");
+    } else if (numberDice === 2 && eggs !== 0) {
       setEggs(eggs - 1);
-    } else if (dice === 3) {
+      setStatus("Has ayudado a Mando a recoger un huevo");
+    } else if (numberDice === 3 && frogs !== 0) {
       setFrogs(frogs - 1);
+      setStatus("Has ayudado a Mando a recoger una rana");
     }
   }
 
   return (
     <div>
-     <Header/>
+      <Header />
       <main className="page">
-       <Board/>
+        <Board position={position} />
         <section>
-          <button onClick={handleRollDice} className="dice">
-            Lanzar Dado
-          </button>
-          <div className="game-status">En curso</div>
+          <Dice RollDice={RollDice} />
+          <div className="game-status">{status}</div>
         </section>
         <section className="goods-container">
           <div className="goods-item">🍪</div>
