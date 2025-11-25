@@ -6,7 +6,7 @@ import Header from "./Header";
 import Dice from "./Dice";
 
 function App() {
-  const [position, setPosition] = useState(1);
+  const [groguPosition, setGroguPosition] = useState(1);
   const [cookies, setCookies] = useState(3);
   const [eggs, setEggs] = useState(3);
   const [frogs, setFrogs] = useState(3);
@@ -16,7 +16,7 @@ function App() {
   function RollDice(numberDice) {
     setDice(numberDice);
     if (numberDice === 4) {
-      setPosition(position + 1);
+      setGroguPosition(groguPosition + 1);
       setStatus("Grogu avanza una casilla");
     } else if (numberDice === 1 && cookies !== 0) {
       setCookies(cookies - 1);
@@ -34,7 +34,7 @@ function App() {
     <div>
       <Header />
       <main className="page">
-        <Board position={position} />
+        <Board groguPosition={groguPosition} />
         <section>
           <Dice RollDice={RollDice} />
           <div className="game-status">{status}</div>
