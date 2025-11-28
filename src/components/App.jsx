@@ -5,6 +5,8 @@ import Board from "./Board";
 import Header from "./Header";
 import Dice from "./Dice";
 
+import { Routes, Route } from "react-router";
+
 function App() {
   const [groguPosition, setGroguPosition] = useState(1);
   const [cookies, setCookies] = useState(3);
