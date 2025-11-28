@@ -4,8 +4,10 @@ import "../styles/App.scss";
 import Board from "./Board";
 import Header from "./Header";
 import Dice from "./Dice";
+import Footer from "./Footer";
 
-import { Routes, Route } from "react-router";
+import { Routes, Route, Router } from "react-router";
+import Instructions from "./Instructions";
 
 function App() {
   const [groguPosition, setGroguPosition] = useState(1);
@@ -35,31 +37,42 @@ function App() {
   return (
     <div>
       <Header />
-      <main className="page">
-        <Board groguPosition={groguPosition} />
-        <section>
-          <Dice RollDice={RollDice} />
-          <div className="game-status">{status}</div>
-        </section>
-        <section className="goods-container">
-          <div className="goods-item">🍪</div>
-          <div className="goods-item">🍪</div>
-          <div className="goods-item">🍪</div>
-        </section>
-        <section className="goods-container">
-          <div className="goods-item">🥚</div>
-          <div className="goods-item">🥚</div>
-          <div className="goods-item">🥚</div>
-        </section>
-        <section className="goods-container">
-          <div className="goods-item">🐸</div>
-          <div className="goods-item">🐸</div>
-          <div className="goods-item">🐸</div>
-        </section>
-        <section>
-          <button className="restart-button">Reiniciar Juego</button>
-        </section>
-      </main>
+
+      <Routes>
+        <Route path="/Instructions" element={<Instructions />}></Route>
+        <Route
+          path="/"
+          element={
+            <main className="page">
+              <Board groguPosition={groguPosition} />
+              <section>
+                <Dice RollDice={RollDice} />
+                <div className="game-status">{status}</div>
+              </section>
+              <section className="goods-container">
+                <div className="goods-item">🍪</div>
+                <div className="goods-item">🍪</div>
+                <div className="goods-item">🍪</div>
+              </section>
+              <section className="goods-container">
+                <div className="goods-item">🥚</div>
+                <div className="goods-item">🥚</div>
+                <div className="goods-item">🥚</div>
+              </section>
+              <section className="goods-container">
+                <div className="goods-item">🐸</div>
+                <div className="goods-item">🐸</div>
+                <div className="goods-item">🐸</div>
+              </section>
+              <section>
+                <button className="restart-button">Reiniciar Juego</button>
+              </section>
+            </main>
+          }
+        ></Route>
+      </Routes>
+
+      <Footer />
     </div>
   );
 }

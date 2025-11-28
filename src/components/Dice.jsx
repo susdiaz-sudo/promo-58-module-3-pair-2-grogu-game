@@ -10,7 +10,7 @@ function Dice({ RollDice }) {
 
   return (
     <button onClick={handleClick} className="dice">
-      🎲
+      ¡Tirada! 🎲
     </button>
   );
 }
