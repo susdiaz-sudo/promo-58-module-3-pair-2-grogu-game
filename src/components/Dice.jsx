@@ -1,16 +1,26 @@
-function Dice({ RollDice }) {
+function Dice({ goods, RollDice, isFinish }) {
   function handleClick() {
-    const numberDice = getRandomNumber();
+    const numberDice = getValidRoll();
     RollDice(numberDice);
   }
 
-  function getRandomNumber() {
-    return Math.floor(Math.random() * (5 - 1) + 1);
+  function getValidRoll() {
+    const options = [];
+    if (goods.cookies > 0) options.push(1);
+    if (goods.eggs > 0) options.push(2);
+    if (goods.frogs > 0) options.push(3);
+    options.push(4);
+    const idx = Math.floor(Math.random() * options.length);
+    return options[idx];
   }
 
   return (
-    <button onClick={handleClick} className="dice">
-      ¡Tirada! 🎲
+    <button
+      onClick={handleClick}
+      className={isFinish ? "dice disabled" : "dice"}
+      disabled={isFinish}
+    >
+      🎲
     </button>
   );
 }

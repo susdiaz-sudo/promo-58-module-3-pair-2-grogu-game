@@ -2,12 +2,22 @@
 
 
 .page {
+   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
   color: #fff;
+}
+
+.page.is-finished::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5); // capa opaca
+  z-index: 1;
+  pointer-events: none;
 }
 
 .grogu {
@@ -21,7 +31,14 @@
   }
 }
 
+.sectionDice{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .dice {
+  position: relative;
   background-color: transparent;
   border: none;
   padding: 10px;
@@ -34,9 +51,35 @@
 
 }
 
+
 .dice:hover {
   transform: scale(1.2);
 }
+
+.dice.disabled {
+  pointer-events: none;      // evita hover/click
+}
+
+.dice.disabled:hover {
+  transform: none;           // sin efecto hover
+}
+
+
+.dice::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.dice.disabled::before {
+  opacity: 1; // muestra la capa del dado desactivado
+}
+
 
 .game-status {
   font-size: 18px;
@@ -46,6 +89,7 @@
 }
 
 .restart-button {
+  position: relative;
   background-color: #d9534f;
   color: white;
   border: none;
@@ -55,6 +99,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transition: background-color 0.2s ease;
   margin-top: 20px;
+  z-index: 2;
 }
 
 .restart-button:hover {

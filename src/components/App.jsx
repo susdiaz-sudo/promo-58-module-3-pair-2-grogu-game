@@ -1,5 +1,5 @@
 // Fichero src/components/App.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/App.scss";
 import Board from "./Board";
 import Header from "./Header";
@@ -19,24 +19,62 @@ function App() {
   });
 
   const [dice, setDice] = useState(0);
+  const [isFinish, setIsFinish] = useState(false);
   const [status, setStatus] = useState("En curso");
 
-  function RollDice(numberDice) {
-    setDice(numberDice);
-    if (numberDice === 4) {
-      setGroguPosition(groguPosition + 1);
-      setStatus("Grogu avanza una casilla");
-    } else if (numberDice === 1 && goods.cookies !== 0) {
-      setGoods({ ...goods, cookies: goods.cookies - 1 });
-      setStatus("Has ayudado a Mando a recoger una galleta");
-    } else if (numberDice === 2 && goods.eggs !== 0) {
-      setGoods({ ...goods, eggs: goods.eggs - 1 });
-      setStatus("Has ayudado a Mando a recoger un huevo");
-    } else if (numberDice === 3 && goods.frogs !== 0) {
-      setGoods({ ...goods, frogs: goods.frogs - 1 });
-      setStatus("Has ayudado a Mando a recoger una rana");
-    }
+ function RollDice(numberDice) {
+  if (isFinish) return; // si el juego ya acabó, salimos y no hacemos nada
+
+  setDice(numberDice); // guardamos el valor que ha salido en el dado (para mostrarlo/logs)
+
+  let nextGrogu = groguPosition; // copiamos la posición actual de Grogu para trabajar sobre ella
+  let nextGoods = { ...goods };   // copiamos el estado de mercancías para modificarlo sin mutar el original
+  let nextStatus = status;        // copiamos el texto de estado por defecto
+
+  if (numberDice === 4) {               // si salió 4:
+    nextGrogu += 1;                     //   Grogu avanza una casilla
+    nextStatus = "Grogu avanza una casilla"; //   y actualizamos el mensaje
+  } else if (numberDice === 1 && nextGoods.cookies > 0) { // si salió 1 y quedan galletas
+    nextGoods.cookies -= 1;             //   restamos una galleta
+    nextStatus = "Has ayudado a Mando a recoger una galleta";
+  } else if (numberDice === 2 && nextGoods.eggs > 0) { // si salió 2 y quedan huevos
+    nextGoods.eggs -= 1;                //   restamos un huevo
+    nextStatus = "Has ayudado a Mando a recoger un huevo";
+  } else if (numberDice === 3 && nextGoods.frogs > 0) { // si salió 3 y quedan ranas
+    nextGoods.frogs -= 1;               //   restamos una rana
+    nextStatus = "Has ayudado a Mando a recoger una rana";
   }
+
+  setGroguPosition(nextGrogu); // aplicamos la posición calculada de Grogu
+  setGoods(nextGoods);         // aplicamos las mercancías calculadas
+  setStatus(nextStatus);       // aplicamos el mensaje calculado
+
+  if (nextGrogu >= 7) {        // comprobamos fin: si Grogu llegó o pasó la casilla 7
+    setStatus("Has perdido!!!");
+    setIsFinish(true);         // marcamos el juego como terminado
+  } else if (
+    nextGoods.cookies === 0 &&
+    nextGoods.eggs === 0 &&
+    nextGoods.frogs === 0
+  ) {                          // comprobamos fin: si se agotaron todas las mercancías
+    setStatus("Has ganado!!!");
+    setIsFinish(true);         // marcamos el juego como terminado
+  }
+}
+
+
+
+
+  const handleReset = () => {
+    setGroguPosition(1);
+    setGoods({
+      cookies: 3,
+      eggs: 3,
+      frogs: 3,
+    });
+    setStatus("En curso");
+    setIsFinish(false);
+  };
 
   return (
     <div>
@@ -47,10 +85,10 @@ function App() {
           <Route
             path="/"
             element={
-              <main className="page">
+              <main className={`page ${isFinish ? "is-finished" : ""}`}>
                 <Board groguPosition={groguPosition} />
-                <section>
-                  <Dice RollDice={RollDice} />
+                <section className="sectionDice">
+                  <Dice goods={goods} RollDice={RollDice} isFinish={isFinish} />
                   <div className="game-status">{status}</div>
                 </section>
                 <Cupboard type="cookies" amount={goods.cookies}>
@@ -64,7 +102,9 @@ function App() {
                 </Cupboard>
 
                 <section>
-                  <button className="restart-button">Reiniciar Juego</button>
+                  <button className="restart-button" onClick={handleReset}>
+                    Reiniciar Juego
+                  </button>
                 </section>
               </main>
             }

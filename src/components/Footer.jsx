@@ -2,27 +2,34 @@ import { NavLink } from "react-router";
 
 function Footer () {
   return (
-    <footer class="footer">
+    <footer className="footer">
       <nav>
         <ul>
-          <li class="footer__menu-item">
-            <NavLink class="footer__menu-link" to="#/">
+          <li className
+          ="footer__menu-item">
+            <NavLink className
+            ="footer__menu-link" to="#/">
               A jugar
             </NavLink>
           </li>
-          <li class="footer__menu-item">
-            <NavLink class="footer__menu-link active" to="/Instructions">
+          <li className
+          ="footer__menu-item">
+            <NavLink className
+            ="footer__menu-link active" to="/Instructions">
               ¿Cómo se juega?
             </NavLink>
           </li>
-          <li class="footer__menu-item">
-            <NavLink class="footer__menu-link" to="#/options">
+          <li className
+          ="footer__menu-item">
+            <NavLink className
+            ="footer__menu-link" to="#/options">
               Más opciones
             </NavLink>
           </li>
         </ul>
       </nav>
-      <small class="footer__copy">© Adalab</small>
+      <small className
+      ="footer__copy">© Adalab</small>
     </footer>
   );
 }
