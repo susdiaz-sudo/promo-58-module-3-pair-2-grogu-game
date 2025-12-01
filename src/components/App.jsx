@@ -5,6 +5,7 @@ import Board from "./Board";
 import Header from "./Header";
 import Dice from "./Dice";
 import Footer from "./Footer";
+import Form from "./Form";
 
 import { Routes, Route, Router } from "react-router";
 import Instructions from "./Instructions";
@@ -15,29 +16,36 @@ function App() {
   const [eggs, setEggs] = useState(3);
   const [frogs, setFrogs] = useState(3);
   const [dice, setDice] = useState();
-  const [status, setStatus] = useState("En curso");
+  const [status, setStatus] = useState("en curso");
+
+  const [name, setName] = useState("");
 
   function RollDice(numberDice) {
     setDice(numberDice);
     if (numberDice === 4) {
       setGroguPosition(groguPosition + 1);
-      setStatus("Grogu avanza una casilla");
+      setStatus(name + ", Grogu avanza una casilla");
     } else if (numberDice === 1 && cookies !== 0) {
       setCookies(cookies - 1);
-      setStatus("Has ayudado a Mando a recoger una galleta");
+      setStatus(name + ", has ayudado a Mando a recoger una galleta");
     } else if (numberDice === 2 && eggs !== 0) {
       setEggs(eggs - 1);
-      setStatus("Has ayudado a Mando a recoger un huevo");
+      setStatus(name + ", has ayudado a Mando a recoger un huevo");
     } else if (numberDice === 3 && frogs !== 0) {
       setFrogs(frogs - 1);
-      setStatus("Has ayudado a Mando a recoger una rana");
+      setStatus(name + ", has ayudado a Mando a recoger una rana");
     }
+  }
+
+  function changeName(name) {
+    setName(name);
+    setStatus(name + ", en curso")
   }
 
   return (
     <div>
       <Header />
-
+      <Form name={name} changeName={changeName} />
       <Routes>
         <Route path="/Instructions" element={<Instructions />}></Route>
         <Route
@@ -45,7 +53,7 @@ function App() {
           element={
             <main className="page">
               <Board groguPosition={groguPosition} />
-              <section>
+              <section className="sectionDice">
                 <Dice RollDice={RollDice} />
                 <div className="game-status">{status}</div>
               </section>

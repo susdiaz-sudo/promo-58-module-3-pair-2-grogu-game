@@ -33,6 +33,12 @@
   transition: transform 0.2s;
 }
 
+.sectionDice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .dice:hover {
   transform: scale(1.1);
 }
