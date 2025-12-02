@@ -22,16 +22,16 @@ function App() {
 
   function RollDice(numberDice) {
     setDice(numberDice);
-    if (numberDice === 4) {
+    if (dice === 4) {
       setGroguPosition(groguPosition + 1);
       setStatus(name + ", Grogu avanza una casilla");
-    } else if (numberDice === 1 && cookies !== 0) {
+    } else if (dice === 1 && cookies !== 0) {
       setCookies(cookies - 1);
       setStatus(name + ", has ayudado a Mando a recoger una galleta");
-    } else if (numberDice === 2 && eggs !== 0) {
+    } else if (dice === 2 && eggs !== 0) {
       setEggs(eggs - 1);
       setStatus(name + ", has ayudado a Mando a recoger un huevo");
-    } else if (numberDice === 3 && frogs !== 0) {
+    } else if (dice === 3 && frogs !== 0) {
       setFrogs(frogs - 1);
       setStatus(name + ", has ayudado a Mando a recoger una rana");
     }
